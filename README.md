@@ -1,1 +1,1 @@
-# The Faster Perft Tool
+# The Fastest Perft Tool
