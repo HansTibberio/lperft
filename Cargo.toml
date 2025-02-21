@@ -1,0 +1,37 @@
+[package]
+name = "lperft"
+version = "0.1.0"
+edition = "2021"
+description = "The Faster Perft Tool"
+
+[dependencies]
+laura_core = "0.2.0"
+clap = {version = "4.5.30", features = ["derive"]}
+rayon = "1.10.0"
+smallvec = "1.14.0"
+
+[features]
+bmi2 = ["laura_core/bmi2"]
+
+[[bin]]
+name = "lperft"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+debug = false
+rpath = false
+debug-assertions = false
+codegen-units = 1
+lto = true
+panic = "abort"
+strip = true
+
+[profile.dev]
+opt-level = 3
+codegen-units = 1
+lto = true
+panic = "abort"
+
+[profile.test]
+opt-level = 1
