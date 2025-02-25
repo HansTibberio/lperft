@@ -35,7 +35,7 @@ fn inner_perft<const DIV: bool>(board: &Board, depth: usize, table: &mut HashTab
     }
 
     let entry: HashEntry = table.probe(board.zobrist);
-    if entry.get_depth() == depth && entry.get_zobrist() == board.zobrist.0 as usize{
+    if entry.get_depth() == depth && entry.get_zobrist() == board.zobrist.0 as usize {
         return entry.get_nodes();
     }
 
