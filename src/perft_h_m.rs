@@ -30,7 +30,7 @@ pub fn perft_hash_multi(board: &Board, depth: usize, size: usize, num_threads: u
             return 0;
         }
 
-        let chunk_size: usize = (num_moves + num_threads - 1) / num_threads;
+        let chunk_size: usize = num_moves.div_ceil(num_threads);
         let total_nodes: AtomicUsize = AtomicUsize::new(0);
 
         rayon::scope(|s| {
