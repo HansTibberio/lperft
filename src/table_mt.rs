@@ -1,3 +1,7 @@
+// table_mt.rs
+
+//! Transposition table for multi-threaded execution.
+
 use std::sync::atomic::{AtomicU64, Ordering};
 
 use laura_core::Zobrist;

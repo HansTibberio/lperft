@@ -1,1 +1,5 @@
-# The Fastest Perft Tool
+# lperft
+
+A blazingly fast perft tool.
+
+

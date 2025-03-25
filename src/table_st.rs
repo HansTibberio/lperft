@@ -1,3 +1,7 @@
+// table_st.rs
+
+//! Transposition table for single-threaded execution.
+
 use laura_core::Zobrist;
 
 const DATA_FIELD_SIZE: usize = size_of::<PackedData>();

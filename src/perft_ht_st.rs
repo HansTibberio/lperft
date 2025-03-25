@@ -1,4 +1,8 @@
-use crate::table_s::{HashEntry, HashTable};
+// perft_ht_st.rs
+
+//! Perft (performance test) with a hash table and single-threaded execution.
+
+use crate::table_st::{HashEntry, HashTable};
 use laura_core::{enumerate_legal_moves, Board, ALL_MOVES};
 
 #[inline(always)]

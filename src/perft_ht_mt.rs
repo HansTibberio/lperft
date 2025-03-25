@@ -1,4 +1,8 @@
-use crate::table_m::HashTable;
+// perft_ht_mt.rs
+
+//! Perft (performance test) with a hash table and multi-threaded execution.
+
+use crate::table_mt::HashTable;
 use laura_core::{enumerate_legal_moves, Board, ALL_MOVES};
 use rayon::{ThreadPool, ThreadPoolBuilder};
 use smallvec::SmallVec;

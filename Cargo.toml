@@ -2,11 +2,11 @@
 name = "lperft"
 version = "0.1.0"
 edition = "2021"
-description = "The Faster Perft Tool"
+description = "A blazingly fast perft tool"
 
 [dependencies]
-laura_core = "0.2.0"
-clap = {version = "4.5.30", features = ["derive"]}
+laura_core = "0.2.1"
+clap = {version = "4.5.32", features = ["derive"]}
 rayon = "1.10.0"
 smallvec = "1.14.0"
 
