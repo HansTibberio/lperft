@@ -1,7 +1,7 @@
 pub mod perft_ht_mt;
 pub mod perft_ht_st;
 pub mod perft_mt;
-pub mod perft_st; 
+pub mod perft_st;
 pub mod table_mt;
 pub mod table_st;
 
