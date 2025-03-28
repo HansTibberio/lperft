@@ -46,11 +46,11 @@ Available options:
     By default, **1** thread is used.
 
 ## Benchmarks
-Below are the benchmarks$^1$ for **lperft**, measuring its performance on **Perft(7), Perft(8), and Perft(9)** from the **starting position** and the well-known _Kiwipete_ position.
+Below are the benchmarks for **lperft**, measuring its performance on **Perft(7), Perft(8), and Perft(9)** from the **starting position** and the well-known _Kiwipete_ position.
 
 **Starting Position Benchmarks**
 |Depth|Hash (MB)|Threads|Time|NPS|
-|-|-|-|-|-|
+|:-:|:-:|:-:|-|-|
 |7|0|1|5.052 s|632,580,821|
 |7|0|2|2.606 s|1,226,088,379|
 |7|64|1|1.655 s|1,930,084,154|
@@ -63,11 +63,11 @@ Below are the benchmarks$^1$ for **lperft**, measuring its performance on **Perf
 
 **Kiwipete Benchmarks**
 |Depth|Hash (MB)|Threads|Time|NPS|
-|-|-|-|-|-|
+|:-:|:-:|:-:|-|-|
 |7|4096|12|10.294 s|36,348,767,805|
 |8|8192|12|247.768 s|62,533,872,605|
 
-$^1$Test system: AMD Ryzen 5 5600G (3.9 GHz), 32 GB DDR4 3200 MHz, Windows 10
+**Test system:** AMD Ryzen 5 5600G (3.9 GHz), 32 GB DDR4 3200 MHz, Windows 10
 
 ## License
 
