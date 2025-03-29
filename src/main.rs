@@ -1,14 +1,5 @@
-pub mod perft_ht_mt;
-pub mod perft_ht_st;
-pub mod perft_mt;
-pub mod perft_st;
-pub mod table_mt;
-pub mod table_st;
+use lperft::{perft_hash_multi, perft_hash_single, perft_multi, perft_single};
 
-use crate::{
-    perft_ht_mt::perft_hash_multi, perft_ht_st::perft_hash_single, perft_mt::perft_multi,
-    perft_st::perft_single,
-};
 use clap::Parser;
 use laura_core::Board;
 use std::{error::Error, str::FromStr};
@@ -33,24 +24,25 @@ struct Args {
     hash: Option<usize>,
 
     /// Number of threads for parallel search.
-    #[arg(short = 't', long = "thread", default_value = "1")]
-    thread: usize,
+    #[arg(short = 't', long = "threads", default_value = "1")]
+    threads: usize,
 }
+
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Args = Args::parse();
 
     let board: Board = Board::from_str(&args.fen)?;
 
     if let Some(hash_size) = args.hash {
-        if args.thread == 1 {
+        if args.threads == 1 {
             let _ = perft_hash_single(&board, args.depth, hash_size);
-        } else if args.thread >= 1 {
-            let _ = perft_hash_multi(&board, args.depth, hash_size, args.thread);
+        } else if args.threads >= 1 {
+            let _ = perft_hash_multi(&board, args.depth, hash_size, args.threads);
         }
-    } else if args.thread == 1 {
+    } else if args.threads == 1 {
         let _ = perft_single(&board, args.depth);
-    } else if args.thread >= 1 {
-        let _ = perft_multi(&board, args.depth, args.thread);
+    } else if args.threads >= 1 {
+        let _ = perft_multi(&board, args.depth, args.threads);
     }
 
     Ok(())

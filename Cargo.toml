@@ -2,7 +2,11 @@
 name = "lperft"
 version = "0.1.0"
 edition = "2021"
-description = "A blazingly fast perft tool"
+authors = ["HansTibberio <hanstiberio@proton.me>"]
+description = "A blazingly fast, multithreaded perft tool"
+license = "GPL-3.0"
+readme = "README.md"
+repository = "https://github.com/HansTibberio/lperft"
 
 [dependencies]
 laura_core = "0.2.2"
