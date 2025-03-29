@@ -11,15 +11,40 @@
 
 **lperft** is a blazingly fast, multithreaded [perft][perft-link] tool designed for command-line use, ideal for debugging chess [move generators][laura-link]. It calculates the total number of nodes from a given chess position and outputs a list of all legal moves, along with their respective node counts at the specified depth.
 
-## Compilation
 
-You can download a precompiled binary from the [Releases][release-link] section of the repository. Alternatively, you can compile it natively for your processor. Make sure you have [Rust][rust-link] installed.
+## Installation and Compilation
 
-For optimal performance, it is recommended to compile with the following options:
+You have several options for installing **lperft**:
+
+### 1. Install using Cargo
+
+The easiest way to install **lperft** is by using [Cargo][cargo-link], the Rust package manager. In your terminal, run the following command:
+
+```bash
+cargo install lperft
+```
+This will download and compile the latest version of **lperft** from [crates.io][crates-link]. 
+
+### 2. Download Precompiled Binary
+
+If you prefer not to compile the program yourself, you can download a precompiled binary from the [Releases][release-link] section of the repository. Simply download the appropriate version for your system and run the binary directly.
+
+### 3. Compile from Source
+
+If you want to compile **lperft** natively for your processor, make sure you have [Rust][rust-link] installed. Then, you can clone the repository and build the project with the following commands:
+
 ``` bash
+git clone https://github.com/HansTibberio/lperft.git
+cd lperft
 RUSTFLAGS="-C target-cpu=native" cargo build --release
 ```
-Additionally, enabling the `bmi2` feature can further improve performance.
+
+For even better performance, you can enable the `bmi2` feature by using the following command to build with this optimization:
+
+``` bash
+RUSTFLAGS="-C target-cpu=native" cargo build --release --features bmi2
+```
+With any of these methods, you'll be able to run **lperft** directly from the command line once the installation or build process is complete.
 
 ## Usage
 
@@ -27,7 +52,21 @@ Additionally, enabling the `bmi2` feature can further improve performance.
 ```bash
 lperft [OPTIONS] --depth <DEPTH>
 ```
-Available options:
+
+### Example Usage
+
+To run **lperft** on the default starting position with a search depth of 7 and use 2 threads:
+
+```bash
+lperft --depth 7 --threads 2
+```
+To analyze a custom position using a FEN string (e.g., a specific position from a game), set the depth to 6, and use a 128MB transposition table:
+
+```bash
+lperft --fen "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1" --depth 6 --hash 128
+```
+
+### Available Options
 
 -   **`-f, --fen <FEN>`**
     Specifies the position in [FEN][fen-link] format (enclosed in quotes).  
@@ -38,10 +77,10 @@ Available options:
     The search depth to evaluate.
     
 -   **`-H, --hash <HASH>`**  
-    The transposition table size in megabytes (optional).  
+    The size of the transposition table in megabytes (optional).  
     If not specified, the search will proceed without a transposition table.
     
--   **`-t, --thread <THREAD>`**  
+-   **`-t, --threads <THREADS>`**  
     The number of threads to use for parallel node search.  
     By default, **1** thread is used.
 
@@ -82,6 +121,7 @@ This project is licensed under **GPLv3**. See the [LICENSE][license-link] file f
 [release-badge]:https://img.shields.io/github/v/release/HansTibberio/lperft?label=official%20release
 [release-link]:https://github.com/HansTibberio/lperft/releases/latest
 
+[cargo-link]:https://doc.rust-lang.org/cargo/
 [fen-link]:https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
 [rust-link]:https://www.rust-lang.org/
 [perft-link]:https://www.chessprogramming.org/Perft
