@@ -1,20 +1,11 @@
-pub mod perft_h_m;
-pub mod perft_h_s;
-pub mod perft_n_m;
-pub mod perft_n_s;
-pub mod table_m;
-pub mod table_s;
+use lperft::{perft_hash_multi, perft_hash_single, perft_multi, perft_single};
 
-use crate::{
-    perft_h_m::perft_hash_multi, perft_h_s::perft_hash_single, perft_n_m::perft_nothash_multi,
-    perft_n_s::perft_nothash_single,
-};
 use clap::Parser;
 use laura_core::Board;
 use std::{error::Error, str::FromStr};
 
 #[derive(Parser)]
-#[command(version, about = "lperft - The Faster Perft Tool", long_about = None)]
+#[command(version, about = "lperft - A blazingly fast perft tool", long_about = None)]
 struct Args {
     /// FEN string representing the chess position.
     #[arg(
@@ -33,24 +24,25 @@ struct Args {
     hash: Option<usize>,
 
     /// Number of threads for parallel search.
-    #[arg(short = 't', long = "thread", default_value = "1")]
-    thread: usize,
+    #[arg(short = 't', long = "threads", default_value = "1")]
+    threads: usize,
 }
+
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Args = Args::parse();
 
     let board: Board = Board::from_str(&args.fen)?;
 
     if let Some(hash_size) = args.hash {
-        if args.thread == 1 {
+        if args.threads == 1 {
             let _ = perft_hash_single(&board, args.depth, hash_size);
-        } else if args.thread >= 1 {
-            let _ = perft_hash_multi(&board, args.depth, hash_size, args.thread);
+        } else if args.threads >= 1 {
+            let _ = perft_hash_multi(&board, args.depth, hash_size, args.threads);
         }
-    } else if args.thread == 1 {
-        let _ = perft_nothash_single(&board, args.depth);
-    } else if args.thread >= 1 {
-        let _ = perft_nothash_multi(&board, args.depth, args.thread);
+    } else if args.threads == 1 {
+        let _ = perft_single(&board, args.depth);
+    } else if args.threads >= 1 {
+        let _ = perft_multi(&board, args.depth, args.threads);
     }
 
     Ok(())

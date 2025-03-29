@@ -1,7 +1,11 @@
+// perft_st.rs
+
+//! Perft (performance test) without a hash table and single-threaded execution.
+
 use laura_core::{enumerate_legal_moves, Board, ALL_MOVES};
 
 #[inline(always)]
-pub fn perft_nothash_single(board: &Board, depth: usize) -> usize {
+pub fn perft_single(board: &Board, depth: usize) -> usize {
     let start: std::time::Instant = std::time::Instant::now();
     let total_nodes: usize = inner_perft::<true>(board, depth);
     let duration: std::time::Duration = start.elapsed();

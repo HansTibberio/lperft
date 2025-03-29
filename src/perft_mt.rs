@@ -1,3 +1,7 @@
+// perft_mt.rs
+
+//! Perft (performance test) without a hash table and multi-threaded execution.
+
 use laura_core::{enumerate_legal_moves, Board, ALL_MOVES};
 use rayon::{ThreadPool, ThreadPoolBuilder};
 use smallvec::SmallVec;
@@ -7,7 +11,7 @@ use std::{
 };
 
 #[inline(always)]
-pub fn perft_nothash_multi(board: &Board, depth: usize, num_threads: usize) -> usize {
+pub fn perft_multi(board: &Board, depth: usize, num_threads: usize) -> usize {
     let pool: ThreadPool = ThreadPoolBuilder::new()
         .num_threads(num_threads)
         .build()
@@ -27,7 +31,7 @@ pub fn perft_nothash_multi(board: &Board, depth: usize, num_threads: usize) -> u
             return 0;
         }
 
-        let chunk_size: usize = (num_moves + num_threads - 1) / num_threads;
+        let chunk_size: usize = num_moves.div_ceil(num_threads);
         let total_nodes: AtomicUsize = AtomicUsize::new(0);
 
         rayon::scope(|s| {
