@@ -6,7 +6,11 @@ authors = ["HansTibberio <hanstiberio@proton.me>"]
 description = "A blazingly fast, multithreaded perft tool"
 license = "GPL-3.0"
 readme = "README.md"
+keywords = ["chess", "game", "perft", "node-count"]
+categories = ["games", "command-line-utilities"]
 repository = "https://github.com/HansTibberio/lperft"
+
+include = ["src/*", "cargo.toml", "README.md"]
 
 [dependencies]
 laura_core = "0.2.2"
